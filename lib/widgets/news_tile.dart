@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 // cached network image
 class NewsTile extends StatelessWidget {
-  const NewsTile({super.key,});
+  const NewsTile({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,11 @@ class NewsTile extends StatelessWidget {
         const SizedBox(
           height: 12,
         ),
-        Text(
+        const Text(
           "The much-loved pontiff’s funeral will be held on Saturday morning as global tributes pour in",
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.black87,
             fontSize: 20,
             fontWeight: FontWeight.w500,
@@ -33,10 +35,14 @@ class NewsTile extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        Text(
+        const Text(
           "Who will be the next pope? Here are some possible candidates",
           maxLines: 2,
-          style: const TextStyle(color: Colors.grey, fontSize: 14),
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
         )
       ],
     );
