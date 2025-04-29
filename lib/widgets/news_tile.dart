@@ -1,32 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/models/article_model.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 // cached network image
 class NewsTile extends StatelessWidget {
   const NewsTile({
     super.key,
+    required this.articleModel,
   });
+
+  final ArticleModel articleModel;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: Image.network(
-              "https://projectmumbai.org/wp-content/uploads/2024/09/Maharashtra-launches-spl-stamp-cover-to-celebrae-spirits-of-Volunteerism.jpeg",
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            )),
+        GestureDetector(onTap: () async {
+          final Uri url = Uri.parse(articleModel.url!);
+          if (!await launchUrl(url)) {
+            throw Exception('Could not launch $url');
+          }
+        },
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image.network(
+                "${articleModel.image}",
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              )),
+        ),
         const SizedBox(
           height: 12,
         ),
-        const Text(
-          "The much-loved pontiff’s funeral will be held on Saturday morning as global tributes pour in",
+        Text(
+          articleModel.title ?? '',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black87,
             fontSize: 20,
             fontWeight: FontWeight.w500,
@@ -35,10 +48,10 @@ class NewsTile extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        const Text(
-          "Who will be the next pope? Here are some possible candidates",
+        Text(
+          articleModel.subTitle ?? '',
           maxLines: 2,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.grey,
             fontSize: 14,
             fontWeight: FontWeight.w500,

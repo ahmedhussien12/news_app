@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/services/news_service.dart';
 
 import 'views/home_view.dart';
 
 void main() async {
   runApp(const MyApp());
+
   // print(await createOrderMessage());
 }
 
@@ -25,6 +27,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'News App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: HomeView(),
     );
   }
